@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button onclick="DLMode()" id="draklightmode">☀️</button>
+    <div class="container">
+        <h1>CRUD</h1>
+        <p>PRODUCT MANAGEMENT SYSTEM</p>
+        <input type="text" name="" id="title" placeholder="Title">
+        <div class="cpta">
+            <input  type="text" name="" id="catagory" placeholder="Catagory">
+            <input onkeyup="showtotale()" type="number" name="" id="price" placeholder="Price">
+            <input onkeyup="showtotale()" type="number" name="" id="tax" placeholder="Taxes">
+            <input onkeyup="showtotale()" type="number" name="" id="ads" placeholder="ADS">
+            <div  id="totale"></div>
+        </div>
+        <input type="number" name="" id="count" placeholder="count">
+        <button id="create">Create</button>
+        <div class="search">
+            <button id="sreachbytitle">Search By Title</button>
+            <button id="searchbycatagory">Search By Catagory</button>
+        </div>
+        <input id="searchBy" type="text" placeholder="Search">
+        <div class="deleteAll">
+            
+        </div>
+      <table >
+        <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>CATAGORY</th>
+            <th>PRICE</th>
+            <th>TAXES</th>
+            <th>ADS</th>
+            <th>TOTALE</th>
+            <th>UPDATE</th>
+            <th>DELETE</th>
+        </tr>
+        <tbody id="table">
+
+        </tbody>
+      </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

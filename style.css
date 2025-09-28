@@ -1,0 +1,225 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+:root{
+    --bg-color:rgb(25, 25, 25);
+    --text-color:rgb(0, 0, 0);
+    --input-bg :white;
+    --input-text:white;
+    --th-text: white;
+        --th-bg: rgb(255, 255, 255);
+        --td-text: rgb(0, 0, 0);
+        --button-bg: rgb(255, 255, 255);
+        --button-text: rgb(0, 0, 0);
+    }
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    position: relative;
+}
+#count{
+    width: 100%;
+    margin: 10px;
+    height: 60px;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 30px;
+}
+.lightmode{
+    --bg-color: rgb(243, 243, 243);
+    --text-color: rgb(255, 255, 255);
+    --input-bg: rgb(25, 24, 33);
+    --input-text: white;
+    --th-text:white;
+    --th-bg:black;
+    --td-text:black;
+    --button-bg:black;
+    --button-text:white;
+}
+.cpta{
+    width: 100%;
+    display:flex
+    ;margin:10px;
+    padding: 10px;
+    align-items: center;
+}
+#title{
+    width: 1200px;
+    height: 60px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 30px;
+    margin-top:10px ;
+}
+.cpta input{
+    height: 50px;
+    margin: 5px;
+    margin-right: 10px;
+    padding: 4px;
+    font-size: 20px;
+    border-radius:10px;
+}
+#totale{
+    background-color: rgb(234, 43, 43);
+    height: 40px;
+    text-align: center;
+    padding: 10px;
+    color:white;
+    border-radius: 3px;
+    font-size: 20px;
+
+}
+input:focus{
+    background-color: rgb(20, 9, 17);
+    color: white;
+    transform: scale(1.1);
+}
+#create{
+    width: 100%;
+    height: 60px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    font-size: 30px;
+    box-shadow: 6px -6px 10px rgb(52, 50, 50) inset;
+    border:none;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+#create:hover{
+    background-color: rgb(75, 76, 74);
+    color: white;
+}
+.search{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.search button{
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    box-shadow: 6px -6px 10px rgb(52, 50, 50) inset;
+}
+.search button:hover{
+    background-color: rgb(88, 88, 93);
+    color: white;
+}
+#searchBy{
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 30px;
+
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container h1{
+    color:var(--input-bg);
+    font-size: 40px;
+}
+.container p{
+    color:var(--button-text);
+    font-size: 20px;
+    background-color:var(--input-bg);
+    border-start-end-radius: 200px;
+    padding: 15px;
+    margin: 10px;
+    border-left: 20px solid orange;
+    font-weight: bold;
+}
+table{
+    width: 100%;
+   
+    text-align: center;
+    margin: 10px;
+
+}
+tr th{
+    color: var(--button-text);
+    font-size: 20px;
+    background-color: var(--th-bg);
+    margin: 2px;
+    padding: 10px;
+    border-radius: 4px;
+}
+tr td{
+    color:var(--button-bg);
+    margin-top: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid rgb(78, 75, 75);
+    border-left: .5px solid rgb(78, 75, 75);
+    padding: 10px;
+    pad: 10px;
+}
+table button{
+    width: 90px;
+    height: 30px;
+    border:none;
+    border-start-end-radius: 10px;
+    padding:5px;
+    font-size: 18px;
+    box-shadow: 4px -4px 5px rgb(52, 50, 50) inset;
+    background-color: var(--button-bg);
+    color:var(--button-text)
+}
+table button:hover{
+    background-color: rgb(143, 139, 139);
+    color:white;
+}
+#draklightmode
+{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    text-align: center;
+    text-shadow: -2px 2px 3px black;
+    /* box-shadow: 20px 13px 15px rgb(54, 54, 54) inset; */
+    border:none;background-color: #97b634;
+    outline: none;
+}
+#draklightmode:hover{
+background-color: #121b31;
+}
+input
+{
+    background-color:var(--input-bg);
+    color:var(--text-color);
+}
+#totale::before{
+    content: 'Totale =';
+}
+.deleteAll button{
+    width: 100%;
+    height: 60px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(247, 59, 59);
+    font-size: 40px;
+    color:white;
+}
+.deleteAll{
+    width: 100%;
+}
+.deleteAll button:hover{
+    background-color: rgb(112, 2, 2);
+}
