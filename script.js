@@ -11,106 +11,80 @@ let searchbycatagory = document.getElementById('searchbycatagory');
 let searchBy = document.getElementById('searchBy');
 let totale = document.getElementById('totale');
 let deleteAll = document.querySelector('.deleteAll');
-let temp;
-
-
-
-//////////////////////////////////////////////////////////////////
-
-
-
-//darkome,lightmode
-
-
-
-darkmode.addEventListener('click',()=>{
-    document.body.classList.toggle('lightmode');
-    if(document.body.classList.contains('lightmode'))
-    {
-        darkmode.textContent = '🌙';
-        darkmode.style.background = '#121b31'
-    }
-    else{
-        darkmode.textContent = '☀️';
-        darkmode.style.background = '#97b634'
-    }
-})
-
-
-// saveData
+let sure = document.getElementById('sure');
+let cancel = document.getElementById('cancel');
+let dialog = document.getElementById('dialog');
 
 let Product;
-if(localStorage.saved!=null)
-{
-    Product = JSON.parse(localStorage.getItem('saved'));
-   
-}
-else{
-    Product= [];
-}
+let mode ='update'; //  default mode for upadating 
+let temp;
 
-
-////////////////////
-create.addEventListener('click',function(){
-    let data={
-        Title:title.value,
-        Catagory:catagory.value,
-        Price:price.value,
-        Taxes:tax.value,
-        ADS:ads.value,
-        totale:totale.textContent,
-        
+// Dark mode / Light mode
+darkmode.addEventListener('click', () => {
+    document.body.classList.toggle('lightmode');
+    if (document.body.classList.contains('lightmode')) {
+        darkmode.textContent = '🌙';
+        darkmode.style.background = '#121b31';
+    } else {
+        darkmode.textContent = '☀️';
+        darkmode.style.background = '#97b634';
     }
-    if(count.value>1)
+});
+
+// Load saved data
+try {
+    Product = JSON.parse(localStorage.getItem('saved')) || [];
+} catch (e) {
+    Product = [];
+}
+
+// Create / Update Product
+create.addEventListener('click', function () {
+    let data = {
+        Title: title.value,
+        Catagory: catagory.value,
+        Price: price.value,
+        Taxes: tax.value,
+        ADS: ads.value,
+        totale: totale.textContent,
+    };
+
+    if(mode==='create')
     {
-    for(i=0;i<count.value;i++)
-    {
-    Product.push(data);
-    }}
+        if (count.value > 1) {
+            for (let i = 0; i < count.value; i++) {
+                Product.push(data);
+            }
+        } else {
+            Product.push(data);
+        }
+    }
     else{
-        Product.push(data);
-
+        
+        Product[temp] =data;
+        mode = 'create';
+        create.innerHTML = 'Create';
+        totale.style.background= 'red';
     }
-localStorage.setItem('saved',JSON.stringify(Product));
-showData();
-Clear();
-})
+    
+    localStorage.setItem('saved', JSON.stringify(Product));
+    showData();
+    Clear();
+});
 
-
-
-///////////////////////////////////////////////
-
-
-
-
-//showTotale
+// Show Total
 function showtotale() {
     if (price.value !== '') {
         let result = (+price.value) + (+tax.value) + (+ads.value);
-        totale.textContent = result; 
-        totale.style.background = 'green'
+        totale.textContent = result;
+        totale.style.background = 'green';
     } else {
-        totale.textContent += '';
-        totale.style.background = 'red'
-
+        totale.textContent = '';
+        totale.style.background = 'red';
     }
 }
 
-
-
-
-
-/////////////////////////////////
-
-
-
-
-
-
-
-//showData
-
-
+// Show Data
 function showData() {
     let table = '';
 
@@ -124,61 +98,70 @@ function showData() {
                <td>${Product[i].Taxes}</td>
                <td>${Product[i].ADS}</td>
                <td>${Product[i].totale}</td>
-               <td><button>Update</button></td>
+               <td><button onclick="Update(${i})">Update</button></td>
                <td><button onclick="delletitem(${i})">Delete</button></td>
             </tr>`;
     }
 
     document.getElementById('table').innerHTML = table;
 
-   /////delete all the items by one click;
-    deleteAll.innerHTML = ''; 
+    // Delete All button
+    deleteAll.innerHTML = '';
     if (Product.length > 0) {
         let DeleteAllbtn = document.createElement('button');
         DeleteAllbtn.innerHTML = `Delete All (${Product.length})`;
         deleteAll.appendChild(DeleteAllbtn);
 
         DeleteAllbtn.addEventListener('click', () => {
-            Product.splice(0);
-            localStorage.setItem('saved', JSON.stringify(Product));
-            showData(); 
+            dialog.showModal();
         });
     }
 }
 
+// Confirm Delete All
+sure.addEventListener('click', () => {
+    Product.splice(0);
+    localStorage.setItem('saved', JSON.stringify(Product));
+    showData();
+    dialog.close();
+});
 
+cancel.addEventListener('click', () => {
+    dialog.close();
+});
 
+// Delete Item
+function delletitem(i) {
+    Product.splice(i, 1);
+    localStorage.setItem('saved', JSON.stringify(Product));
+    showData();
+}
 
-
-/////////////////////dleteItem
-function delletitem(i)
-{
- Product.splice(i,1);
- localStorage.setItem('saved',JSON.stringify(Product));
- showData();
+// Clear Function
+function Clear() {
+    title.value = '';
+    price.value = '';
+    tax.value = '';
+    ads.value = '';
+    totale.textContent = '';
+    catagory.value = '';
+    count.value = '';
 }
 
 
-//clear Function;
 
-
-function Clear()
+function Update(i)
 {
-    title.value = ''    ;
-    price.value = ''    ;
-    tax.value = ''    ;
-    ads.value = ''    ;
-    totale.textContent = ''    ;
-    catagory.value = ''    ;
-    count.value = ''    ;
-
-
+    title.focus();
+    title.value = Product[i].Title;
+    price.value = Product[i].Price;
+    tax.value = Product[i].Taxes;
+    catagory.value = Product[i].Catagory;
+    ads.value = Product[i].ADS;
+    temp = i;
+    create.innerHTML = 'Save Upadates';
+    mode = 'Update';
+    
 }
 
-
-
-
-
-
-
-
+showData();
