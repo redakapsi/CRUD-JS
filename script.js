@@ -6,7 +6,7 @@ let ads = document.getElementById('ads');
 let count = document.getElementById('count');
 let title = document.getElementById('title');
 let create = document.getElementById('create');
-let sreachbytitle = document.getElementById('sreachbytitle');
+let searchbytitle = document.getElementById('sreachbytitle');
 let searchbycatagory = document.getElementById('searchbycatagory');
 let searchBy = document.getElementById('searchBy');
 let totale = document.getElementById('totale');
@@ -14,9 +14,8 @@ let deleteAll = document.querySelector('.deleteAll');
 let sure = document.getElementById('sure');
 let cancel = document.getElementById('cancel');
 let dialog = document.getElementById('dialog');
-
 let Product;
-let mode ='update'; //  default mode for upadating 
+let mode ='create'; //  default mode for upadating 
 let temp;
 
 // Dark mode / Light mode
@@ -51,6 +50,7 @@ create.addEventListener('click', function () {
 
     if(mode==='create')
     {
+  
         if (count.value > 1) {
             for (let i = 0; i < count.value; i++) {
                 Product.push(data);
@@ -65,6 +65,7 @@ create.addEventListener('click', function () {
         mode = 'create';
         create.innerHTML = 'Create';
         totale.style.background= 'red';
+        count.style.display = 'flex';
     }
     
     localStorage.setItem('saved', JSON.stringify(Product));
@@ -161,7 +162,72 @@ function Update(i)
     temp = i;
     create.innerHTML = 'Save Upadates';
     mode = 'Update';
+    count.style.display = 'none';
     
 }
+
+
+
+//catagory
+searchbycatagory.addEventListener('click',()=>{
+    searchBy.focus();
+    searchBy.placeholder = 'Search By Catagory';
+   
+    searchBy.addEventListener('keyup', () => {
+
+        search('Catagory');
+
+
+    })
+});
+
+
+
+
+/////title
+searchbytitle.addEventListener('click',()=>{
+    searchBy.focus();
+    searchBy.placeholder = 'Search By Title';
+    searchBy.addEventListener('keyup', () => {
+
+        search('Title');
+
+
+    })
+
+})
+
+
+
+
+
+
+//////search f
+
+function search(type)
+{
+    s = searchBy.value.toLowerCase();
+    let table = '';
+    for (let i = 0; i < Product.length; i++) {
+        if (Product[i][type].toLowerCase().includes(s)) {
+            table += `
+            <tr>
+               <td>${i + 1}</td>
+               <td>${Product[i].Title}</td>
+               <td>${Product[i].Catagory}</td>
+               <td>${Product[i].Price}</td>
+               <td>${Product[i].Taxes}</td>
+               <td>${Product[i].ADS}</td>
+               <td>${Product[i].totale}</td>
+               <td><button onclick="Update(${i})">Update</button></td>
+               <td><button onclick="delletitem(${i})">Delete</button></td>
+            </tr>`;
+        }
+    }
+    document.getElementById('table').innerHTML = table;
+    searchBy.placeholder='Search'
+}
+
+
 
 showData();
