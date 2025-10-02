@@ -47,6 +47,6 @@ Add search by title or category.
 
 Add sorting & filtering (e.g., by price or category).
 
-Add export/import feature for saving products as a file.
+Add export/import feature for saving products as a file.(already added still only import);
 
 👉 In short, this app is like a mini inventory manager or CRUD system (Create, Read, Update, Delete) for products, with a clean UI and dark/light mode support.

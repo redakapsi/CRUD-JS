@@ -228,6 +228,44 @@ function search(type)
     searchBy.placeholder='Search'
 }
 
+function pExortPDF() {
+    // clone the table container
+    const element = document.querySelector('.containerTable').cloneNode(true);
+
+    // get the table inside the container
+    const table = element.querySelector('table');
+
+    // remove last two columns from header
+    const ths = table.querySelectorAll('th');
+    ths[ths.length - 1].remove(); // ddelete/////
+    ths[ths.length - 2].remove(); // update...
+//e
+    // rremove last two columns from every row
+    table.querySelectorAll('tr').forEach(tr => {
+        const tds = tr.querySelectorAll('td');
+        if (tds.length > 0) {
+            tds[tds.length - 1].remove(); // Delete
+            tds[tds.length - 2].remove(); // Update
+        }
+    });
+
+    // export options fdsg
+    const opt = {
+        margin: 0.5,
+        filename: 'Products.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    // make sure table is updated before export
+    showData();
+
+    html2pdf().set(opt).from(element).save();
+}
+
+
 
 
 showData();

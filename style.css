@@ -267,3 +267,28 @@ dialog button:hover{
     font-size: 30px;
 }
 
+#export{
+    width: 60%;
+    height: 50px;
+    font-size: 30px;
+    border-radius: 10px;
+    border-left:80px solid rgb(254, 11, 11);
+    background-color: #fff; 
+    transition: all .5s ease;
+}
+#export:hover{
+    width: 70%;
+    height: 7dvh;
+    color: white;
+    background-color: black;
+}
+.containerTable{
+    width: 100%;
+}
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
